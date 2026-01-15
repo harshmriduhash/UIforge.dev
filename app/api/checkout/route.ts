@@ -3,12 +3,24 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-  apiVersion: "2024-06-20",
-});
+export const dynamic = "force-dynamic";
+
+const getStripe = () => {
+
+  const key = process.env.STRIPE_SECRET_KEY || "";
+  return new Stripe(key, {
+    apiVersion: "2024-06-20",
+  });
+};
 
 export async function POST(request: Request) {
   try {
+    const stripe = getStripe();
+    if (!process.env.STRIPE_SECRET_KEY) {
+      console.error("STRIPE_SECRET_KEY is missing");
+      return NextResponse.json({ error: "Stripe is not configured" }, { status: 500 });
+    }
+
     const session = await getServerSession(authOptions);
     if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

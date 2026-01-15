@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
+
 // Mock component data - in production, this would come from a database
 const mockComponents = [
   {
