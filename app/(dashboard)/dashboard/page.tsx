@@ -1,6 +1,12 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { useSession } from "next-auth/react";
 import { motion } from "framer-motion";
 import { Component, Zap, Users, TrendingUp } from "lucide-react";
@@ -46,7 +52,7 @@ export default function DashboardPage() {
           Welcome back, {session?.user?.name || "User"}!
         </h1>
         <p className="text-muted-foreground">
-          Here's what's happening with your projects today.
+          Here&apos;s what&apos;s happening with your projects today.
         </p>
       </motion.div>
 
@@ -60,12 +66,16 @@ export default function DashboardPage() {
           >
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
+                <CardTitle className="text-sm font-medium">
+                  {stat.title}
+                </CardTitle>
                 <stat.icon className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{stat.value}</div>
-                <p className="text-xs text-muted-foreground">{stat.description}</p>
+                <p className="text-xs text-muted-foreground">
+                  {stat.description}
+                </p>
               </CardContent>
             </Card>
           </motion.div>
@@ -80,26 +90,34 @@ export default function DashboardPage() {
         <Card>
           <CardHeader>
             <CardTitle>Recent Activity</CardTitle>
-            <CardDescription>Your latest component creations and updates</CardDescription>
+            <CardDescription>
+              Your latest component creations and updates
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium">Button Component</p>
-                  <p className="text-xs text-muted-foreground">Created 2 hours ago</p>
+                  <p className="text-xs text-muted-foreground">
+                    Created 2 hours ago
+                  </p>
                 </div>
               </div>
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium">Card Component</p>
-                  <p className="text-xs text-muted-foreground">Updated 5 hours ago</p>
+                  <p className="text-xs text-muted-foreground">
+                    Updated 5 hours ago
+                  </p>
                 </div>
               </div>
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium">Modal Component</p>
-                  <p className="text-xs text-muted-foreground">Created yesterday</p>
+                  <p className="text-xs text-muted-foreground">
+                    Created yesterday
+                  </p>
                 </div>
               </div>
             </div>
