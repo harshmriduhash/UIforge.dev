@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { sendEmail } from "@/lib/email";
-
-// In production, store OTPs in Redis or database with expiration
-const otpStore = new Map<string, { code: string; expiresAt: number }>();
+import { prisma } from "@/lib/prisma";
 
 export async function POST(request: Request) {
   try {
@@ -14,12 +12,28 @@ export async function POST(request: Request) {
 
     // Generate 6-digit OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    const expiresAt = Date.now() + 10 * 60 * 1000; // 10 minutes
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
 
-    // Store OTP
-    otpStore.set(email, { code: otp, expiresAt });
+    // Store OTP in database
+    await prisma.verificationToken.upsert({
+      where: {
+        identifier_token: {
+          identifier: email,
+          token: otp,
+        },
+      },
+      update: {
+        token: otp,
+        expires: expiresAt,
+      },
+      create: {
+        identifier: email,
+        token: otp,
+        expires: expiresAt,
+      },
+    });
 
-    // Send email (in production, use a proper email service)
+    // Send email
     try {
       await sendEmail({
         to: email,
@@ -32,7 +46,6 @@ export async function POST(request: Request) {
       });
     } catch (error) {
       console.error("Email send error:", error);
-      // In development, log the OTP
       if (process.env.NODE_ENV === "development") {
         console.log(`OTP for ${email}: ${otp}`);
       }
@@ -48,6 +61,7 @@ export async function POST(request: Request) {
   }
 }
 
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const email = searchParams.get("email");
@@ -57,21 +71,40 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Email and code are required" }, { status: 400 });
   }
 
-  const stored = otpStore.get(email);
+  const stored = await prisma.verificationToken.findUnique({
+    where: {
+      identifier_token: {
+        identifier: email,
+        token: code,
+      },
+    },
+  });
+
   if (!stored) {
     return NextResponse.json({ error: "Invalid or expired code" }, { status: 400 });
   }
 
-  if (Date.now() > stored.expiresAt) {
-    otpStore.delete(email);
+  if (new Date() > stored.expires) {
+    await prisma.verificationToken.delete({
+      where: {
+        identifier_token: {
+          identifier: email,
+          token: code,
+        },
+      },
+    });
     return NextResponse.json({ error: "Code expired" }, { status: 400 });
   }
 
-  if (stored.code !== code) {
-    return NextResponse.json({ error: "Invalid code" }, { status: 400 });
-  }
-
   // Code is valid, clean up
-  otpStore.delete(email);
+  await prisma.verificationToken.delete({
+    where: {
+      identifier_token: {
+        identifier: email,
+        token: code,
+      },
+    },
+  });
   return NextResponse.json({ valid: true });
 }
+

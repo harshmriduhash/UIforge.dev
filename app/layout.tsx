@@ -7,8 +7,12 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "UIForge.dev - Build Beautiful UI Components",
-  description: "Prototype, preview, and reuse high-quality UI patterns with production-grade React architecture",
+  description:
+    "Prototype, preview, and reuse high-quality UI patterns with production-grade React architecture",
   manifest: "/manifest.json",
+};
+
+export const viewport = {
   themeColor: "#ffffff",
 };
 
