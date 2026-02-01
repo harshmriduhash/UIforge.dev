@@ -10,16 +10,58 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum SubscriptionPlan {
+  FREE
+  PRO
+}
+
 model User {
-  id            String    @id @default(cuid())
+  id            String           @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?          @unique
   emailVerified DateTime?
   image         String?
+  role          UserRole         @default(USER)
+  plan          SubscriptionPlan @default(FREE)
+  stripeCustomerId String?       @unique
+  stripeSubscriptionId String?   @unique
+  
   accounts      Account[]
   sessions      Session[]
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  savedComponents UserSavedComponent[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+}
+
+model Component {
+  id          String   @id @default(cuid())
+  name        String
+  code        String   @db.Text
+  description String
+  category    String
+  isPremium   Boolean  @default(false)
+  usageCount  Int      @default(0)
+  
+  savedBy     UserSavedComponent[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+}
+
+model UserSavedComponent {
+  userId      String
+  componentId String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  component   Component @relation(fields: [componentId], references: [id], onDelete: Cascade)
+  savedAt     DateTime  @default(now())
+
+  @@id([userId, componentId])
 }
 
 model Account {
@@ -55,7 +97,6 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token], name: "identifier_token")
-
 }
 
 

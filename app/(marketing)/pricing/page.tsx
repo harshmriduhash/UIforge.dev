@@ -54,7 +54,29 @@ const plans = [
   },
 ];
 
+import { useCheckout } from "@/lib/api";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 export default function PricingPage() {
+  const { data: session } = useSession();
+  const router = useRouter();
+  const checkoutMutation = useCheckout();
+
+  const handleCheckout = async (planName: string) => {
+    if (!session) {
+      router.push("/login?callbackUrl=/pricing");
+      return;
+    }
+
+    if (planName === "Pro") {
+      const priceId = "price_H7p2r8L9J2kL3p"; // Example Price ID
+      checkoutMutation.mutate(priceId);
+    } else if (planName === "Free") {
+      router.push("/dashboard");
+    }
+  };
+
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
@@ -110,9 +132,10 @@ export default function PricingPage() {
                     <Button
                       className="w-full mt-6"
                       variant={plan.popular ? "default" : "outline"}
-                      asChild
+                      disabled={checkoutMutation.isPending}
+                      onClick={() => handleCheckout(plan.name)}
                     >
-                      <Link href="/login">{plan.cta}</Link>
+                      {checkoutMutation.isPending && plan.name === "Pro" ? "Processing..." : plan.cta}
                     </Button>
                   </CardContent>
                 </Card>

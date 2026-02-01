@@ -1,11 +1,11 @@
 {
   "name": "UIForge.dev",
   "short_name": "UIForge",
-  "description": "Prototype, preview, and reuse high-quality UI patterns",
+  "description": "Master Production-grade UI Patterns",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
   "icons": [
     {
       "src": "/icon-192x192.png",

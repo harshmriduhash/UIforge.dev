@@ -29,6 +29,9 @@ interface ComponentCardProps {
 }
 
 const ComponentCard = ({ component, onSelect, isSelected }: ComponentCardProps) => {
+  const { data: session } = useSession();
+  const isLocked = component.isPremium && session?.user?.plan !== "PRO";
+
   const handleClick = useCallback(() => {
     onSelect(component.id);
   }, [component.id, onSelect]);
@@ -39,17 +42,28 @@ const ComponentCard = ({ component, onSelect, isSelected }: ComponentCardProps) 
       whileTap={{ scale: 0.98 }}
     >
       <Card
-        className={`cursor-pointer transition-all ${
+        className={`cursor-pointer transition-all relative overflow-hidden ${
           isSelected ? "ring-2 ring-primary" : ""
-        }`}
+        } ${isLocked ? "opacity-75 grayscale-[0.5]" : ""}`}
         onClick={handleClick}
       >
+        {isLocked && (
+          <div className="absolute top-2 right-2 z-10">
+            <div className="bg-yellow-500/10 text-yellow-500 text-[10px] font-bold px-2 py-1 rounded-full border border-yellow-500/20 flex items-center gap-1">
+              <Zap size={10} className="fill-yellow-500" />
+              PRO
+            </div>
+          </div>
+        )}
         <CardHeader>
-          <CardTitle className="text-lg">{component.name}</CardTitle>
-          <CardDescription>{component.description}</CardDescription>
+          <CardTitle className="text-lg flex items-center gap-2">
+            {component.name}
+            {isLocked && <span className="text-muted-foreground opacity-50">🔒</span>}
+          </CardTitle>
+          <CardDescription className="line-clamp-2">{component.description}</CardDescription>
         </CardHeader>
         <CardContent>
-          <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
+          <span className="text-[10px] uppercase tracking-wider font-bold text-primary bg-primary/10 px-2 py-1 rounded">
             {component.category}
           </span>
         </CardContent>
@@ -171,20 +185,41 @@ function PlaygroundContent() {
             animate={{ opacity: 1, x: 0 }}
             className="w-96 space-y-4"
           >
-            <Card>
+            <Card className="border-primary/20 bg-primary/5">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle>{selectedComponentData.name}</CardTitle>
-                  <Button size="icon" variant="ghost" onClick={handleCopyCode}>
+                  <Button 
+                    size="icon" 
+                    variant="ghost" 
+                    onClick={handleCopyCode}
+                    disabled={selectedComponentData.isPremium && session?.user?.plan !== "PRO"}
+                  >
                     <Copy className="h-4 w-4" />
                   </Button>
                 </div>
                 <CardDescription>{selectedComponentData.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Suspense fallback={<div className="h-64 animate-pulse bg-muted rounded" />}>
-                  <ComponentPreview component={selectedComponentData} />
-                </Suspense>
+                {selectedComponentData.isPremium && session?.user?.plan !== "PRO" ? (
+                  <div className="flex flex-col items-center justify-center p-8 text-center space-y-4 bg-background/50 rounded-lg border border-dashed">
+                    <Zap className="h-12 w-12 text-yellow-500 fill-yellow-500 animate-pulse" />
+                    <div>
+                      <h3 className="font-bold">Premium Component</h3>
+                      <p className="text-sm text-muted-foreground">Unlock access to production-ready patterns.</p>
+                    </div>
+                    <Button 
+                      className="w-full bg-gradient-to-r from-yellow-500 to-amber-600 border-0"
+                      onClick={() => window.location.href = '/pricing'}
+                    >
+                      Upgrade to PRO
+                    </Button>
+                  </div>
+                ) : (
+                  <Suspense fallback={<div className="h-64 animate-pulse bg-muted rounded" />}>
+                    <ComponentPreview component={selectedComponentData} />
+                  </Suspense>
+                )}
               </CardContent>
             </Card>
           </motion.div>

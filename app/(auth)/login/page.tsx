@@ -37,19 +37,24 @@ export default function LoginPage() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const result = await signIn("email", {
-        email,
-        redirect: false,
+      const res = await fetch("/api/auth/otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
       });
-      if (result?.ok) {
+      
+      const data = await res.json();
+      
+      if (res.ok) {
         toast({
           title: "Check your email",
-          description: "We sent you a login link. Check your inbox.",
+          description: "We sent you a 6-digit verification code.",
         });
+        router.push(`/verify?email=${encodeURIComponent(email)}`);
       } else {
         toast({
           title: "Error",
-          description: "Failed to send login email",
+          description: data.error || "Failed to send code",
           variant: "destructive",
         });
       }

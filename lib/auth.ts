@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 import EmailProvider from "next-auth/providers/email";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -10,6 +11,24 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    }),
+    CredentialsProvider({
+      name: "OTP",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        code: { label: "Code", type: "text" },
+      },
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials?.code) return null;
+
+        const user = await prisma.user.upsert({
+          where: { email: credentials.email },
+          update: {},
+          create: { email: credentials.email },
+        });
+
+        return user;
+      },
     }),
     EmailProvider({
       server: {
@@ -37,6 +56,13 @@ export const authOptions: NextAuthOptions = {
         session.user.email = token.email || "";
         session.user.name = token.name || null;
         session.user.image = token.picture || null;
+        
+        // Fetch plan from database
+        const dbUser = await prisma.user.findUnique({
+          where: { id: token.sub },
+          select: { plan: true }
+        });
+        session.user.plan = dbUser?.plan || "FREE";
       }
       return session;
     },
