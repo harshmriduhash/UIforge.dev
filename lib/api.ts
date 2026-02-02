@@ -14,7 +14,8 @@ export async function fetchComponents(
   search?: string,
   category?: string,
   page = 1,
-  limit = 20
+  limit = 20,
+  ids?: string[]
 ): Promise<{ components: Component[]; total: number }> {
   const params = new URLSearchParams({
     page: page.toString(),
@@ -22,16 +23,17 @@ export async function fetchComponents(
   });
   if (search) params.append("search", search);
   if (category) params.append("category", category);
+  if (ids && ids.length > 0) params.append("ids", ids.join(","));
 
   const res = await fetch(`/api/components?${params}`);
   if (!res.ok) throw new Error("Failed to fetch components");
   return res.json();
 }
 
-export function useComponents(search?: string, category?: string, page = 1) {
+export function useComponents(search?: string, category?: string, page = 1, ids?: string[]) {
   return useQuery({
-    queryKey: ["components", search, category, page],
-    queryFn: () => fetchComponents(search, category, page),
+    queryKey: ["components", search, category, page, ids],
+    queryFn: () => fetchComponents(search, category, page, 20, ids),
     staleTime: 5 * 60 * 1000,
   });
 }

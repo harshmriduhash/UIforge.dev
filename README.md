@@ -37,6 +37,13 @@ UIForge.dev is a high-performance, full-stack SaaS platform designed for senior 
 - **SEO Optimized**: Pre-configured JSON-LD, OpenGraph tags, and meta-descriptions for maximum indexability.
 - **Performance First**: 95+ Lighthouse scores via React.memo, useCallback, and dynamic imports.
 
+### 🤖 AI-Powered Exploration & Generation
+
+- **AI Component Generator**: Forge production-ready React/Tailwind components from simple text descriptions.
+- **In-App AI Editor**: Production-grade Monaco editor with real-time AI code refinement and suggestions.
+- **Smart AI Search**: Natural language filtering to find components based on intent, not just keywords.
+- **AI Assistant Chat**: Integrated platform expert to help users master UI patterns and framework features.
+
 ---
 
 ## 🛠️ Tech Stack
@@ -50,6 +57,8 @@ UIForge.dev is a high-performance, full-stack SaaS platform designed for senior 
 - **Payments**: Stripe (Checkout + Webhooks)
 - **State/Data**: Zustand & TanStack Query
 - **PWA**: next-pwa
+- **AI Engine**: Vercel AI SDK & OpenAI (GPT-4o)
+- **Code Editor**: Monaco Editor (@monaco-editor/react)
 
 ---
 
@@ -72,6 +81,7 @@ Copy `.env.example` to `.env` and fill in:
 - `GOOGLE_CLIENT_ID/SECRET`: Credentials from Google Cloud Console.
 - `STRIPE_SECRET_KEY/WEBHOOK_SECRET`: API keys from Stripe Dashboard.
 - `SMTP_*`: Credentials for the OTP email system.
+- `OPENAI_API_KEY`: Your OpenAI API key for AI-powered features.
 
 ### 3. Database Initialization
 
@@ -129,6 +139,7 @@ UIForge is optimized for **Vercel**.
 | **Growth**    | SEO Pages       | Zero-cost organic traffic              |
 | **Revenue**   | Stripe Webhooks | Low-maintenance subscription revenue   |
 | **Retention** | Saved Items     | User "Stickiness" and workflow lock-in |
+| **Expansion** | AI Generation   | Unlimited content variety and utility |
 
 ---
 

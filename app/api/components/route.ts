@@ -10,10 +10,13 @@ export async function GET(request: Request) {
     const category = searchParams.get("category") || "";
     const page = parseInt(searchParams.get("page") || "1");
     const limit = parseInt(searchParams.get("limit") || "20");
+    const ids = searchParams.get("ids")?.split(",") || [];
 
     const where: any = {};
 
-    if (search) {
+    if (ids.length > 0) {
+      where.id = { in: ids };
+    } else if (search) {
       where.OR = [
         { name: { contains: search, mode: 'insensitive' } },
         { description: { contains: search, mode: 'insensitive' } },
