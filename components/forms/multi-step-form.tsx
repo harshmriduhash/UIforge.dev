@@ -4,7 +4,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -61,7 +67,9 @@ export function MultiStepForm({ steps, onSubmit }: MultiStepFormProps) {
           >
             <div className="space-y-4">
               <div>
-                <h3 className="text-lg font-semibold">{steps[currentStep].title}</h3>
+                <h3 className="text-lg font-semibold">
+                  {steps[currentStep].title}
+                </h3>
                 <p className="text-sm text-muted-foreground">
                   {steps[currentStep].description}
                 </p>
