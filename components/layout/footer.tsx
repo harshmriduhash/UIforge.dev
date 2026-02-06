@@ -9,12 +9,18 @@ export function Footer() {
             <h3 className="text-sm font-semibold">Product</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link href="/dashboard/playground" className="hover:text-foreground">
+                <Link
+                  href="/dashboard/playground"
+                  className="hover:text-foreground"
+                >
                   Playground
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard/library" className="hover:text-foreground">
+                <Link
+                  href="/dashboard/library"
+                  className="hover:text-foreground"
+                >
                   Library
                 </Link>
               </li>
@@ -82,7 +88,9 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} UIForge.dev. All rights reserved.</p>
+          <p>
+            &copy; {new Date().getFullYear()} UIForge.dev. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
