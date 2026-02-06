@@ -139,7 +139,7 @@ UIForge is optimized for **Vercel**.
 | **Growth**    | SEO Pages       | Zero-cost organic traffic              |
 | **Revenue**   | Stripe Webhooks | Low-maintenance subscription revenue   |
 | **Retention** | Saved Items     | User "Stickiness" and workflow lock-in |
-| **Expansion** | AI Generation   | Unlimited content variety and utility |
+| **Expansion** | AI Generation   | Unlimited content variety and utility  |
 
 ---
 
