@@ -2,22 +2,22 @@
 
 import { useState } from "react";
 import { useCompletion } from "ai/react";
-import { 
-  Sparkles, 
-  Wand2, 
-  Loader2, 
-  Code2, 
-  Eye, 
+import {
+  Sparkles,
+  Wand2,
+  Loader2,
+  Code2,
+  Eye,
   Save,
-  Rocket
+  Rocket,
 } from "lucide-react";
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogHeader, 
-  DialogTitle, 
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
   DialogDescription,
-  DialogFooter
+  DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -29,7 +29,11 @@ interface AIGeneratorDialogProps {
   onGenerated: (code: string, name: string) => void;
 }
 
-export function AIGeneratorDialog({ isOpen, onClose, onGenerated }: AIGeneratorDialogProps) {
+export function AIGeneratorDialog({
+  isOpen,
+  onClose,
+  onGenerated,
+}: AIGeneratorDialogProps) {
   const [prompt, setPrompt] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const { toast } = useToast();
@@ -52,7 +56,7 @@ export function AIGeneratorDialog({ isOpen, onClose, onGenerated }: AIGeneratorD
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
       let code = "";
-      
+
       if (reader) {
         while (true) {
           const { done, value } = await reader.read();
@@ -61,13 +65,13 @@ export function AIGeneratorDialog({ isOpen, onClose, onGenerated }: AIGeneratorD
           const chunk = decoder.decode(value);
           const lines = chunk.split("\n");
           for (const line of lines) {
-            if (line.startsWith('0:')) {
+            if (line.startsWith("0:")) {
               try {
                 const content = JSON.parse(line.substring(2));
                 code += content;
               } catch (e) {
                 // If it's not JSON, it might be raw text in some protocol versions
-                code += line.substring(2).replace(/^"(.*)"$/, '$1'); 
+                code += line.substring(2).replace(/^"(.*)"$/, "$1");
               }
             }
           }
@@ -97,13 +101,16 @@ export function AIGeneratorDialog({ isOpen, onClose, onGenerated }: AIGeneratorD
         <DialogHeader>
           <div className="flex items-center gap-2 text-indigo-400 mb-1">
             <Sparkles className="h-5 w-5 fill-indigo-400/20" />
-            <span className="text-xs font-bold uppercase tracking-widest">AI Component Forge</span>
+            <span className="text-xs font-bold uppercase tracking-widest">
+              AI Component Forge
+            </span>
           </div>
           <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
             What should we build today?
           </DialogTitle>
           <DialogDescription className="text-slate-400">
-            Describe the UI component you need. Be specific about features, colors, and behavior.
+            Describe the UI component you need. Be specific about features,
+            colors, and behavior.
           </DialogDescription>
         </DialogHeader>
 
@@ -118,12 +125,21 @@ export function AIGeneratorDialog({ isOpen, onClose, onGenerated }: AIGeneratorD
               disabled={isGenerating}
             />
           </div>
-          
+
           <div className="mt-4 flex flex-wrap gap-2">
-            {["Pricing Table", "Glass Navigation", "User Profile Card", "Data Dashboard"].map((tag) => (
+            {[
+              "Pricing Table",
+              "Glass Navigation",
+              "User Profile Card",
+              "Data Dashboard",
+            ].map((tag) => (
               <button
                 key={tag}
-                onClick={() => setPrompt(`A professional ${tag.toLowerCase()} using React and Tailwind CSS...`)}
+                onClick={() =>
+                  setPrompt(
+                    `A professional ${tag.toLowerCase()} using React and Tailwind CSS...`,
+                  )
+                }
                 className="text-[10px] px-2 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-400 hover:border-indigo-500 hover:text-indigo-400 transition-colors"
                 disabled={isGenerating}
               >
