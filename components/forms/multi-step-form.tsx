@@ -85,7 +85,7 @@ export function MultiStepForm({ steps, onSubmit }: MultiStepFormProps) {
             onClick={handlePrevious}
             disabled={currentStep === 0}
           >
-            Previous
+            Previou
           </Button>
           {currentStep === steps.length - 1 ? (
             <Button onClick={handleSubmit}>Submit</Button>
