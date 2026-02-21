@@ -1,6 +1,6 @@
-# UIForge.dev — Production-Ready SaaS UI Engine
+# Glint — Production-Ready SaaS UI Engine
 
-UIForge.dev is a high-performance, full-stack SaaS platform designed for senior developers and agencies to prototype, preview, and deploy high-quality UI patterns. Built with **Next.js 14**, **Prisma**, **Stripe**, and **Framer Motion**, it provides a battle-tested foundation for selling UI components or building a component-driven ecosystem.
+Glint is a high-performance, full-stack SaaS platform designed for senior developers and agencies to prototype, preview, and deploy high-quality UI patterns. Built with **Next.js 14**, **Prisma**, **Stripe**, and **Framer Motion**, it provides a battle-tested foundation for selling UI components or building a component-driven ecosystem.
 
 ---
 
@@ -8,8 +8,8 @@ UIForge.dev is a high-performance, full-stack SaaS platform designed for senior 
 
 ### 🔐 Advanced Authentication (Custom OTP)
 
-- **Custom 6-Digit OTP Flow**: Moved beyond generic magic links to a branded, high-conversion verification experience.
-- **Google OAuth Integration**: One-click social login via NextAuth.
+- **Custom 6-Digit OTP Flow**: Branded, high-conversion verification experience.
+- **GitHub OAuth Integration**: One-click social login via NextAuth for developers.
 - **Session-Based Protection**: Secure middleware and API route protection.
 - **Persistent User Profiles**: Managed via Prisma with Role-Based Access Control (RBAC).
 
@@ -31,11 +31,13 @@ UIForge.dev is a high-performance, full-stack SaaS platform designed for senior 
 - **Paywalled Code Access**: Restricts sensitive component source code to authorized PRO subscribers.
 - **Search & Filter**: Debounced search and category filtering powered by PostgreSQL.
 
-### 📱 Modern PWA & SEO
+### 📱 Modern PWA & Premium Aesthetics
 
+- **Glassmorphism Design System**: High-end translucent interfaces with mesh-gradient backgrounds.
+- **Micro-Animations**: Shimmer effects, float animations, and smooth Framer Motion transitions.
 - **Installable App**: Full PWA manifest support for a native-like mobile experience.
-- **SEO Optimized**: Pre-configured JSON-LD, OpenGraph tags, and meta-descriptions for maximum indexability.
-- **Performance First**: 95+ Lighthouse scores via React.memo, useCallback, and dynamic imports.
+- **SEO Optimized**: Pre-configured JSON-LD, OpenGraph tags, and meta-descriptions.
+- **Performance First**: 95+ Lighthouse scores via React.memo and dynamic imports.
 
 ### 🤖 AI-Powered Exploration & Generation
 
@@ -50,10 +52,10 @@ UIForge.dev is a high-performance, full-stack SaaS platform designed for senior 
 
 - **Framework**: Next.js 14 (App Router)
 - **Language**: TypeScript
-- **Database**: PostgreSQL (Neon/Railway) with Prisma ORM
+- **Database**: PostgreSQL (Neon/Railway) or SQLite (Local) with Prisma ORM
 - **Styling**: Tailwind CSS & Shadcn/UI
 - **Animations**: Framer Motion
-- **Auth**: NextAuth.js (Google + Custom Credentials OTP)
+- **Auth**: NextAuth.js (GitHub + Custom Credentials OTP)
 - **Payments**: Stripe (Checkout + Webhooks)
 - **State/Data**: Zustand & TanStack Query
 - **PWA**: next-pwa
@@ -68,7 +70,7 @@ UIForge.dev is a high-performance, full-stack SaaS platform designed for senior 
 
 ```bash
 git clone <your-repo-url>
-cd UIforge.dev
+cd Glint
 npm install
 ```
 
@@ -76,9 +78,9 @@ npm install
 
 Copy `.env.example` to `.env` and fill in:
 
-- `DATABASE_URL`: Your PostgreSQL connection string.
+- `DATABASE_URL`: Your PostgreSQL or SQLite connection string.
 - `NEXTAUTH_SECRET`: Random string for JWT encryption.
-- `GOOGLE_CLIENT_ID/SECRET`: Credentials from Google Cloud Console.
+- `GITHUB_CLIENT_ID/SECRET`: Credentials from GitHub Developer Settings.
 - `STRIPE_SECRET_KEY/WEBHOOK_SECRET`: API keys from Stripe Dashboard.
 - `SMTP_*`: Credentials for the OTP email system.
 - `OPENAI_API_KEY`: Your OpenAI API key for AI-powered features.
@@ -122,7 +124,7 @@ npm run dev
 
 ## 🌍 Deployment
 
-UIForge is optimized for **Vercel**.
+Glint is optimized for **Vercel**.
 
 1. Push to GitHub.
 2. Link project to Vercel.
@@ -145,4 +147,4 @@ UIForge is optimized for **Vercel**.
 
 ## 📄 License
 
-MIT © 2026 UIForge.dev
+MIT © 2026 Glint

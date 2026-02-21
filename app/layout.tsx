@@ -14,19 +14,19 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "UIForge.dev - Master Production-grade UI Patterns",
+  title: "Glint - Master Production-grade UI Patterns",
   description: "Prototype, preview, and reuse high-quality UI patterns with production-grade React architecture. Built for senior frontend engineers.",
   keywords: ["Next.js", "React", "SaaS", "Tailwind CSS", "UI Components", "Frontend Architecture"],
-  authors: [{ name: "UIForge Team" }],
+  authors: [{ name: "Glint Team" }],
   manifest: "/manifest.json",
   icons: {
     apple: "/icon-192x192.png",
   },
   openGraph: {
-    title: "UIForge.dev",
+    title: "Glint",
     description: "Build beautiful UI components faster.",
-    url: "https://uiforge.dev",
-    siteName: "UIForge",
+    url: "https://glint.dev",
+    siteName: "Glint",
     images: [
       {
         url: "/og-image.png",

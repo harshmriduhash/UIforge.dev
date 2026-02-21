@@ -97,7 +97,7 @@ export default function DashboardPage() {
           <CardHeader>
             <CardTitle>Global Updates</CardTitle>
             <CardDescription>
-              Newest components added to the UIForge repository
+              Newest components added to the Glint repository
             </CardDescription>
           </CardHeader>
           <CardContent>

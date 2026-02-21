@@ -19,7 +19,7 @@ export function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="sticky top-0 z-50 w-full glass-effect border-b-white/5 supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -28,7 +28,7 @@ export function Navbar() {
         >
           <Link href="/" className="flex items-center space-x-2">
             <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-              UIForge.dev
+              Glint
             </span>
           </Link>
         </motion.div>

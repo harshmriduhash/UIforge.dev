@@ -1,6 +1,6 @@
 # ✅ Execution Checklist
 
-Step-by-step checklist for executing the UIForge.dev project from setup to deployment.
+Step-by-step checklist for executing the Glint project from setup to deployment.
 
 ## Phase 1: Initial Setup
 

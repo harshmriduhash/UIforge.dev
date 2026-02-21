@@ -1,6 +1,6 @@
 "use client";
 
-import { useChat } from "ai/react";
+import { useChat } from "@ai-sdk/react";
 import { useState, useRef, useEffect } from "react";
 import {
   MessageCircle,
@@ -53,7 +53,7 @@ export function AIAssistant() {
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-white">
-                    UIForge Assistant
+                    Glint Assistant
                   </h3>
                   <div className="flex items-center gap-1.5">
                     <span className="relative flex h-2 w-2">
@@ -110,7 +110,7 @@ export function AIAssistant() {
                     </p>
                   </div>
                 )}
-                {messages.map((m) => (
+                {messages.map((m: any) => (
                   <div
                     key={m.id}
                     className={cn(

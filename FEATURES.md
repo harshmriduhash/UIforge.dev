@@ -1,4 +1,4 @@
-# UIForge.dev - Feature List
+# Glint - Feature List
 
 ## ✅ Completed Features
 

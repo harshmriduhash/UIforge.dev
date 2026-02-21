@@ -47,7 +47,7 @@ export function Sidebar() {
     <aside className="hidden w-64 border-r bg-background md:flex md:flex-col">
       <div className="flex h-16 items-center border-b px-6">
         <Link href="/dashboard" className="flex items-center space-x-2">
-          <span className="text-xl font-bold">UIForge</span>
+          <span className="text-xl font-bold">Glint</span>
         </Link>
       </div>
       <nav className="flex-1 space-y-1 p-4">

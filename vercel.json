@@ -1,5 +1,5 @@
 {
-  "name": "uiforge-dev",
+  "name": "glint-dev",
   "framework": "nextjs",
   "installCommand": "npm install",
   "buildCommand": "npm run build"

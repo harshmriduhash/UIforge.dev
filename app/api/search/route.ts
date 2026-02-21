@@ -19,11 +19,11 @@ export async function POST(req: Request) {
     },
   });
 
-  const componentList = components.map(c => 
+  const componentList = components.map(c =>
     `ID: ${c.id}, Name: ${c.name}, Desc: ${c.description}, Cat: ${c.category}`
   ).join("\n");
 
-  const system = `You are a search assistant for UIforge.dev. 
+  const system = `You are a search assistant for Glint. 
 The user will provide a natural language query. 
 You will return a JSON object with a 'componentIds' array containing the IDs of components that best match the query.
 If no components match well, return an empty array.

@@ -6,19 +6,14 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
-enum UserRole {
-  USER
-  ADMIN
-}
+// ENUMS are not supported in SQLite. Using String with @default instead.
+// UserRole: USER, ADMIN
+// SubscriptionPlan: FREE, PRO
 
-enum SubscriptionPlan {
-  FREE
-  PRO
-}
 
 model User {
   id            String           @id @default(cuid())
@@ -26,8 +21,8 @@ model User {
   email         String?          @unique
   emailVerified DateTime?
   image         String?
-  role          UserRole         @default(USER)
-  plan          SubscriptionPlan @default(FREE)
+  role          String           @default("USER")
+  plan          String           @default("FREE")
   stripeCustomerId String?       @unique
   stripeSubscriptionId String?   @unique
   
@@ -41,7 +36,7 @@ model User {
 model Component {
   id          String   @id @default(cuid())
   name        String
-  code        String   @db.Text
+  code        String
   description String
   category    String
   isPremium   Boolean  @default(false)
@@ -70,12 +65,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)

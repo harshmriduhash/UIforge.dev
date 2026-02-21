@@ -1,6 +1,6 @@
 # 💼 SaaS Ready Checklist
 
-Comprehensive checklist to ensure UIForge.dev is ready as a Software-as-a-Service product.
+Comprehensive checklist to ensure Glint is ready as a Software-as-a-Service product.
 
 ## Business Readiness
 

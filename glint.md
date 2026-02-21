@@ -1,4 +1,4 @@
-# UIForge.dev — BUILD TODAY Cursor Super‑Prompt (Single MD)
+# Glint — Build High-End UI with AI
 
 > **Instruction**: Copy EVERYTHING below and paste directly into Cursor (or any AI IDE).  
 > Do NOT ask questions. Generate code step‑by‑step. Prioritize correctness over perfection.
@@ -8,7 +8,7 @@
 ## ROLE & GOAL
 You are a **Senior Frontend Architect + Product Engineer**.
 
-Your goal is to build **UIForge.dev**, a **standalone PWA SaaS** that demonstrates **advanced React.js architecture, performance optimization, and real-world frontend systems**.
+Your goal is to build **Glint**, a **standalone PWA SaaS** that demonstrates **advanced React.js architecture, performance optimization, and real-world frontend systems**.
 
 This is **NOT a toy project**. It must look, feel, and behave like a real product.
 
@@ -18,7 +18,7 @@ Target: **Deployed MVP today on Vercel**.
 
 ## PRODUCT DEFINITION
 
-**UIForge.dev** is a frontend-focused SaaS that helps developers **prototype, preview, and reuse high-quality UI patterns** with production-grade React architecture.
+**Glint** is a frontend-focused SaaS that helps developers **prototype, preview, and reuse high-quality UI patterns** with production-grade React architecture.
 
 Core positioning:
 - Frontend architecture mastery
@@ -47,7 +47,7 @@ Core positioning:
 - NextAuth.js
 
 ### Auth
-- Google OAuth
+- GitHub OAuth
 - OTP (Email)
 
 ### Infra
@@ -114,7 +114,7 @@ Core positioning:
 - Responsive
 
 ### 2. Auth System
-- Google login
+- GitHub login
 - Email OTP login
 - Protected routes
 - Session persistence

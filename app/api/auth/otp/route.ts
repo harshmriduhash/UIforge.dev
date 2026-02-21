@@ -39,7 +39,7 @@ export async function POST(request: Request) {
     try {
       await sendEmail({
         to: email,
-        subject: "Your UIForge Login Code",
+        subject: "Your Glint Login Code",
         html: `
           <h1>Your login code</h1>
           <p>Your verification code is: <strong>${otp}</strong></p>

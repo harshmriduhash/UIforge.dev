@@ -1,6 +1,6 @@
 # 🚀 Launch Checklist
 
-Use this checklist to ensure everything is ready before launching UIForge.dev to production.
+Use this checklist to ensure everything is ready before launching Glint to production.
 
 ## Pre-Launch
 
